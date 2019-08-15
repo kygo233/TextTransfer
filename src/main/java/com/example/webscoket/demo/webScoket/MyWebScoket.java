@@ -15,10 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * Created by 自由翱翔峰 on 2018/12/7 16:09
- */
-
+ 
 /**
  * 虽然@component默认是单例模式的，但在spring boot
  * 中还是会为每一个webscoket连接初始化一个bean，所以这里使用一个静态的set保存spring boot创建的bean--MyWebscoket
