@@ -9,30 +9,7 @@
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<style type="text/css">
-#message {
-	margin: 0 auto;
-	margin-top: 10px;
-	width: 95%;
-}
 
-.alert {
-	margin: 0 auto;
-	margin-top: 10px;
-	padding: 8px;
-	width: auto;
-	max-width: 70%;
-	clear: both;
-}
-
-.right-msg {
-	float: right;
-}
-
-.left-msg {
-	float: left;
-}
-</style>
 <script type="text/javascript">
 	//连接对象
 	var websocket = null;
@@ -70,17 +47,18 @@
 		var data = JSON.parse(msg);
 		var message = document.getElementById('message');
 		if (data.name == name) {
-			message.innerHTML += '<div class="alert alert-success right-msg" role="alert">'
+			message.innerHTML += '<div class="message-div right-msg" >'
 					+ data.msg + "</div>";
 		} else {
-			message.innerHTML += '<div class="alert alert-info left-msg" role="alert">'
+			message.innerHTML += '<div class="message-div left-msg" >'
 					+ data.msg + "</div>";
 		}
-
 	}
 	//发送消息
 	function send() {
-		var message = document.getElementById('text').value;
+		 
+		var message = $("#send-div input").val();
+		$("#send-div input").val("");
 		//var pindao = document.getElementById("pindao").value;
 		var pindao = "";
 		var socketMsg = {
@@ -107,18 +85,80 @@
 </script>
 </head>
 <body>
-	<div id="message"></div>
-	<nav class="navbar navbar-default navbar-fixed-bottom">
-		<div class="container">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" id="text" class="form-control"
-						placeholder="Search">
-				</div>
-				<button type="button" onclick="send()" class="btn btn-default">send</button>
-			</form>
+	<div id="main-div">
+		<div id="message"></div>
+		<div id="send-div">
+			<input type="text" class="form-control">
+			<button type="button" onclick="send()" class="btn btn-default">send</button>
 		</div>
-	</nav>
-
+	</div>
 </body>
+<style type="text/css">
+html, body {
+	height: 100%;
+}
+
+#main-div {
+	margin: 0 auto;
+	width: 95%;
+	height: 100%;
+	border: 1px solid red;
+	max-width: 900px;
+	overflow: hidden;
+}
+
+#message {
+	padding: 10px;
+	overflow-y: scroll;
+	border: 1px solid red;
+	height: calc(100% - 54px);
+}
+
+#send-div {
+	display: flex;
+	flex-direction: row;
+	height: 34px;
+	padding: 10px;
+}
+
+#send-div input {
+	width: 90%;
+}
+
+#send-div button {
+	width: 10%;
+	height: 34px;
+}
+
+.message-div {
+	margin: 0 auto;
+	margin-top: 10px;
+	width: auto;
+	padding-top:10px;
+	padding-left:10px;
+	padding-bottom:10px;
+	padding-right:10px;
+	max-width: 70%;
+	clear: both;
+ 	border-radius:4px;
+	border:1px solid transparent;
+	word-wrap: break-word;
+	word-break: break-all;
+	
+}
+
+.right-msg {
+	float: right;
+	color:#3c763d;
+	background-color: #dff0d8;
+	border-color:#d6e9c6;
+}
+
+.left-msg {
+	float: left;
+	color:#31708f;
+	background-color: #d9edf7;
+	border-color:#bce8f1;
+}
+</style>
 </html>
